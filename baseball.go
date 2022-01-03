@@ -29,8 +29,16 @@ func (g gameNumbers) guess(nums string) (Score, error) {
 		return Score{}, fmt.Errorf("invalid nums: %s", nums)
 	}
 
-
-	
+	//중복된 숫자가 있는지
+	used := make(map[uint8]bool)
+	for i := 0; i < len(nums); i++ {
+		_, found := used[nums[i]]
+		fmt.Print(nums[i])
+		if found {
+			return Score{}, fmt.Errorf("invalued nums: %s", nums)
+		}
+		used[nums[i]] = true
+	}
 	return Score{}, nil
 }
 
