@@ -1,6 +1,9 @@
 package GGBB
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 type Game interface{
 
@@ -10,13 +13,21 @@ type gameNumbers struct {
 	nums string
 }
 
-func CreateGame(nums string) Game {
-	return &gameNumbers{nums: nums}
+func CreateGame(nums string) (Game, error) {
+	// return &gameNumbers{nums: nums}, nil
+	return nil, fmt.Errorf("invalued nums: %s", nums)
 }
 
-func TestCreateGame(t *testing.T){
-	var game Game = CreateGame("012")
-	if game == nil{
-		t.Fatalf("no game created")
+func TestInvalidNums(t *testing.T){
+	_, err := CreateGame("01")
+	if err == nil {
+		t.Fatalf("error must be returned: invalie nums: %s", "01")
+	}
+
+	_, err2 := CreateGame("01456")
+	if err2 == nil {
+		t.Fatalf("error must be returned: invalie nums: %s", "01456")
 	}
 }
+
+
