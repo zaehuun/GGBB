@@ -42,9 +42,17 @@ func (g gameNumbers) guess(nums string) (Score, error) {
 	}
 
 	balls := 0
+	numIdx := make(map[uint8]int)
+	for i := 0; i < len(g.nums); i++ {
+		numIdx[g.nums[i]] = i
+	}
+	for i := 0; i < len(nums); i++ {
+		idx, found := numIdx[nums[i]]
+		if found && idx != i {
+			balls++
+		}
+	}
 	
-	
-
 	return Score{strikes: strikes, balls: balls}, nil
 }
 
