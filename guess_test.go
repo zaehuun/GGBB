@@ -24,3 +24,22 @@ func assertGuessReturnError(t *testing.T, game Game, nums string){
 		t.Fatalf("error must be returned: %s", nums)
 	}
 }
+
+func TestGuess(t *testing.T) {
+	g, _ := CreateGame("123")
+	assertScore(t, g, "567", 0, 0)
+	assertScore(t, g, "156", 0, 0)
+	assertScore(t, g, "025", 0, 0)
+	assertScore(t, g, "567", 0, 0)
+}
+
+func assertScore(t *testing.T, g Game, nums string, expectedStrikes int, expectedBalls int){
+	score, _ := g.guess(nums)
+	if score.strikes != expectedStrikes {
+		t.Fatalf("guess number %s: strikes exprected %d, but %d", nums, expectedStrikes, score.strikes)
+	}
+
+	if score.balls != expectedBalls {
+		t.Fatalf("guess number %s: balls exprected %d, but %d", nums, expectedBalls, score.balls)
+	}
+}

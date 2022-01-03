@@ -10,7 +10,8 @@ type Game interface {
 }
 
 type Score struct {
-	
+	strikes int
+	balls int
 }
 
 type gameNumbers struct {
