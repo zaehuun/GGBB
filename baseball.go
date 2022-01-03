@@ -24,21 +24,15 @@ func (g gameNumbers) guess(nums string) (Score, error) {
 	}
 
 	// 추측 값이 숫자로만 이루어졌는지
-	matched, _ := regexp.MatchString("^[0-9]*$", nums)
-	if !matched {
+	if containsNonDigit(nums){
 		return Score{}, fmt.Errorf("invalid nums: %s", nums)
 	}
 
 	//중복된 숫자가 있는지
-	used := make(map[uint8]bool)
-	for i := 0; i < len(nums); i++ {
-		_, found := used[nums[i]]
-		fmt.Print(nums[i])
-		if found {
-			return Score{}, fmt.Errorf("invalued nums: %s", nums)
-		}
-		used[nums[i]] = true
+	if hasDuplicateDigit(nums) {
+		return Score{}, fmt.Errorf("invalued nums: %s", nums)
 	}
+
 	return Score{}, nil
 }
 
@@ -49,21 +43,36 @@ func CreateGame(nums string) (Game, error) {
 		return nil, fmt.Errorf("invalid nums: %s", nums)
 	}
 
-	//입력 값이 숫자로만 이루어졌는지
-	matched, _ := regexp.MatchString("^[0-9]*$", nums)
-	if !matched {
+	// 추측 값이 숫자로만 이루어졌는지
+	if containsNonDigit(nums){
 		return nil, fmt.Errorf("invalid nums: %s", nums)
 	}
 
 	//중복된 숫자가 있는지
+	if hasDuplicateDigit(nums) {
+		return nil, fmt.Errorf("invalued nums: %s", nums)
+	}
+	
+	return &gameNumbers{nums: nums}, nil
+}
+
+func containsNonDigit(nums string) bool {
+	matched, _ := regexp.MatchString("^[0-9]*$", nums)
+	if !matched {
+		return true
+	}
+	return false
+}
+
+func hasDuplicateDigit(nums string) bool {
 	used := make(map[uint8]bool)
-	for i := 0; i < length; i++ {
+	for i := 0; i < len(nums); i++ {
 		_, found := used[nums[i]]
 		fmt.Print(nums[i])
 		if found {
-			return nil, fmt.Errorf("invalued nums: %s", nums)
+			return true
 		}
 		used[nums[i]] = true
 	}
-	return &gameNumbers{nums: nums}, nil
+	return false
 }
