@@ -41,7 +41,11 @@ func (g gameNumbers) guess(nums string) (Score, error) {
 		}
 	}
 
-	return Score{strikes: 0, balls: 0}, nil
+	balls := 0
+	
+	
+
+	return Score{strikes: strikes, balls: balls}, nil
 }
 
 func CreateGame(nums string) (Game, error) {
@@ -76,7 +80,6 @@ func hasDuplicateDigit(nums string) bool {
 	used := make(map[uint8]bool)
 	for i := 0; i < len(nums); i++ {
 		_, found := used[nums[i]]
-		fmt.Print(nums[i])
 		if found {
 			return true
 		}
