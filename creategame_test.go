@@ -14,8 +14,11 @@ type gameNumbers struct {
 }
 
 func CreateGame(nums string) (Game, error) {
-	// return &gameNumbers{nums: nums}, nil
-	return nil, fmt.Errorf("invalued nums: %s", nums)
+	var length  int = len(nums)
+	if length < 3 || length > 4 {
+		return nil, fmt.Errorf("invalued nums: %s", nums)
+	}
+	return &gameNumbers{nums: nums}, nil
 }
 
 func TestInvalidNums(t *testing.T){
@@ -27,6 +30,13 @@ func TestInvalidNums(t *testing.T){
 	_, err2 := CreateGame("01456")
 	if err2 == nil {
 		t.Fatalf("error must be returned: invalie nums: %s", "01456")
+	}
+}
+
+func TestCreateGame(t *testing.T){
+	game, err := CreateGame("123")
+	if err != nil || game == nil{
+		t.Fatalf("game be returned")
 	}
 }
 
