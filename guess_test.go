@@ -40,6 +40,13 @@ func TestGuess(t *testing.T) {
 	assertScore(t, g, "901", 0, 1)
 	assertScore(t, g, "294", 0, 1)
 	assertScore(t, g, "892", 0, 1)
+
+	assertScore(t, g, "234", 0, 2)
+	assertScore(t, g, "315", 0, 2)
+
+	assertScore(t, g, "312", 0, 3)
+
+	assertScore(t, g, "132", 1, 2)
 }
 
 func assertScore(t *testing.T, g Game, nums string, expectedStrikes int, expectedBalls int){
