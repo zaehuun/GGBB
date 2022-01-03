@@ -22,21 +22,24 @@ func CreateGame(nums string) (Game, error) {
 }
 
 func TestInvalidNums(t *testing.T){
-	_, err := CreateGame("01")
-	if err == nil {
-		t.Fatalf("error must be returned: invalie nums: %s", "01")
-	}
 
-	_, err2 := CreateGame("01456")
-	if err2 == nil {
-		t.Fatalf("error must be returned: invalie nums: %s", "01456")
-	}
+	assertError(t, "01")
+	assertError(t, "01456")
+	
 }
 
 func TestCreateGame(t *testing.T){
+	
 	game, err := CreateGame("123")
 	if err != nil || game == nil{
 		t.Fatalf("game be returned")
+	}
+}
+
+func assertError(t *testing.T, nums string) {
+	_, err := CreateGame(nums)
+	if err == nil {
+		t.Fatalf("error must be returned: invalie nums: %s", nums)
 	}
 }
 
