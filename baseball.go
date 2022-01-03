@@ -6,6 +6,11 @@ import (
 )
 
 type Game interface {
+	guess(s string) (Score, error)
+}
+
+type Score struct {
+	
 }
 
 type gameNumbers struct {
