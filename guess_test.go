@@ -28,9 +28,13 @@ func assertGuessReturnError(t *testing.T, game Game, nums string){
 func TestGuess(t *testing.T) {
 	g, _ := CreateGame("123")
 	assertScore(t, g, "567", 0, 0)
-	assertScore(t, g, "156", 0, 0)
-	assertScore(t, g, "025", 0, 0)
-	assertScore(t, g, "567", 0, 0)
+	assertScore(t, g, "156", 1, 0)
+	assertScore(t, g, "025", 1, 0)
+	assertScore(t, g, "453", 1, 0)
+	assertScore(t, g, "129", 2, 0)
+	assertScore(t, g, "103", 2, 0)
+	assertScore(t, g, "023", 2, 0)
+	assertScore(t, g, "123", 2, 0)
 }
 
 func assertScore(t *testing.T, g Game, nums string, expectedStrikes int, expectedBalls int){

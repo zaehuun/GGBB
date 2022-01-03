@@ -34,7 +34,14 @@ func (g gameNumbers) guess(nums string) (Score, error) {
 		return Score{}, fmt.Errorf("invalued nums: %s", nums)
 	}
 
-	return Score{}, nil
+	strikes := 0
+	for i := 0; i < len(nums); i++ {
+		if g.nums[i] == nums[i] {
+			strikes++
+		}
+	}
+
+	return Score{strikes: 0, balls: 0}, nil
 }
 
 func CreateGame(nums string) (Game, error) {
